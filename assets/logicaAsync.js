@@ -1,9 +1,12 @@
-function enviarDatos() {
+async function enviarDatos() {
     const nombre = document.getElementById('nombre').value;
-
-    enviarDatosAlServidor(nombre)
-        .then(mostrarMensajeBienvenida)
-        .catch(mostrarMensajeError)
+    try {
+        const resultado = await enviarDatosAlServidor(nombre);
+        mostrarMensajeBienvenida(resultado);
+    } catch (mensaje) {
+        mostrarMensajeError(mensaje);
+    }
+    
 }
 
 function enviarDatosAlServidor(nombre) {
